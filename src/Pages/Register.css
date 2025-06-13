@@ -11,23 +11,24 @@
 
 .form-box {
   background-color: rgba(255, 255, 255, 0.95);
-  padding: 1.5rem;
+  padding: 2rem;
   border-radius: 15px;
   width: 90%;
-  max-width: 400px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  max-width: 420px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
 }
 
 h2 {
   text-align: center;
   color: #006400;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
 }
 
 .auth-form {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 1rem;
 }
 
 .input-group {
@@ -36,6 +37,7 @@ h2 {
   background-color: #f8f8f8;
   border-radius: 8px;
   padding: 0.5rem 0.8rem;
+  position: relative;
 }
 
 .icon {
@@ -43,7 +45,8 @@ h2 {
   margin-right: 0.6rem;
 }
 
-.input-group input {
+.input-group input,
+.role-select {
   flex: 1;
   border: none;
   outline: none;
@@ -52,12 +55,32 @@ h2 {
   color: #333;
 }
 
+/* Select Group Custom Styles */
+.select-group {
+  position: relative;
+}
+
+.role-select {
+  appearance: none;
+  padding-right: 2rem;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.dropdown-icon {
+  position: absolute;
+  right: 1rem;
+  pointer-events: none;
+  color: #006400;
+}
+
 .submit-btn {
   margin-top: 1rem;
   background-color: #006400;
   color: white;
-  padding: 0.7rem;
+  padding: 0.75rem;
   font-size: 1rem;
+  font-weight: 500;
   border: none;
   border-radius: 8px;
   cursor: pointer;
