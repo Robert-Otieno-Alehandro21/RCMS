@@ -1,29 +1,40 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import {
-  Gavel,
-  PackagePlus,
-  Home,
-  ShieldCheck
-} from "lucide-react";
 import "./Constructioncompany.css";
+import { FaHardHat, FaTools, FaTruck, FaUserFriends, FaBriefcase } from "react-icons/fa";
 
 const Constructioncompany = () => {
   return (
-    <>
-      <Navbar />
-      <div className="dashboard company">
-        <h2>Construction Company Dashboard</h2>
-        <div className="dashboard-section">
-          <button><Gavel size={16} /> Bid for Projects</button>
-          <button><PackagePlus size={16} /> Request Materials</button>
-          <button><Home size={16} /> Upload House Designs</button>
-          <button><ShieldCheck size={16} /> Submit Company Credentials</button>
+    <div className="dashboard-container">
+      <h2 className="dashboard-title">Construction Company Dashboard</h2>
+      <div className="dashboard-modules">
+        <div className="dashboard-card">
+          <FaHardHat className="dashboard-icon" />
+          <h3>Assign Workers</h3>
+          <p>Allocate workforce to various project sites.</p>
+        </div>
+        <div className="dashboard-card">
+          <FaTools className="dashboard-icon" />
+          <h3>Request Materials</h3>
+          <p>Send material requirements to suppliers.</p>
+        </div>
+        <div className="dashboard-card">
+          <FaTruck className="dashboard-icon" />
+          <h3>Logistics</h3>
+          <p>Track equipment and delivery schedules.</p>
+        </div>
+        <div className="dashboard-card">
+          <FaUserFriends className="dashboard-icon" />
+          <h3>Team Management</h3>
+          <p>Organize and monitor team performance.</p>
+        </div>
+        <div className="dashboard-card">
+          <FaBriefcase className="dashboard-icon" />
+          <h3>Bid for Projects</h3>
+          <p>Participate in upcoming project tenders.</p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
 export default Constructioncompany;
-

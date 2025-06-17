@@ -1,27 +1,39 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import {
-  UploadCloud,
-  CheckCircle,
-  ClipboardList,
-  FileText
-} from "lucide-react";
 import "./Projectmanager.css";
+import { FaProjectDiagram, FaMapMarkedAlt, FaImages, FaClipboardCheck, FaTools } from "react-icons/fa";
 
 const Projectmanager = () => {
   return (
-    <>
-      <Navbar />
-      <div className="dashboard manager">
-        <h2>Project Manager Dashboard</h2>
-        <div className="dashboard-section">
-          <button><UploadCloud size={16} /> Upload Project Photos</button>
-          <button><CheckCircle size={16} /> Approve Milestones</button>
-          <button><ClipboardList size={16} /> Track Project Status</button>
-          <button><FileText size={16} /> View Reports</button>
+    <div className="dashboard-container">
+      <h2 className="dashboard-title">Project Manager Dashboard</h2>
+      <div className="dashboard-modules">
+        <div className="dashboard-card">
+          <FaProjectDiagram className="dashboard-icon" />
+          <h3>Create Project</h3>
+          <p>Start new construction projects efficiently.</p>
+        </div>
+        <div className="dashboard-card">
+          <FaMapMarkedAlt className="dashboard-icon" />
+          <h3>Select Land</h3>
+          <p>Choose areas using map coordinates.</p>
+        </div>
+        <div className="dashboard-card">
+          <FaImages className="dashboard-icon" />
+          <h3>Upload Photos</h3>
+          <p>Document the progress of your projects.</p>
+        </div>
+        <div className="dashboard-card">
+          <FaClipboardCheck className="dashboard-icon" />
+          <h3>Approve Milestones</h3>
+          <p>Sign off project milestones for review.</p>
+        </div>
+        <div className="dashboard-card">
+          <FaTools className="dashboard-icon" />
+          <h3>Manage Resources</h3>
+          <p>Track and allocate tools and labor.</p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -24,6 +24,9 @@ const App = () => {
       <Route path="/project-manager" element={<Projectmanager />} />
       <Route path="/construction-company" element={<Constructioncompany />} />
       <Route path="/bank-management" element={<Bankmanagement />} />
+    
+
+
     </Routes>
   );
 };
