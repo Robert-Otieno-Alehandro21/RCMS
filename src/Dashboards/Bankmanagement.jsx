@@ -1,36 +1,43 @@
 import React from "react";
 import "./Bankmanagement.css";
+import Header from "../components/Header";
+import { useNavigate } from "react-router-dom";
 import { FaMoneyCheckAlt, FaFileInvoice, FaSearchDollar, FaClipboardList, FaHistory } from "react-icons/fa";
 
 const Bankmanagement = () => {
+  const navigate = useNavigate();
+
   return (
-    <div className="dashboard-container">
-      <h2 className="dashboard-title">Bank Management Dashboard</h2>
-      <div className="dashboard-modules">
-        <div className="dashboard-card">
-          <FaMoneyCheckAlt className="dashboard-icon" />
-          <h3>Approve Payments</h3>
-          <p>Authorize payments for completed milestones.</p>
-        </div>
-        <div className="dashboard-card">
-          <FaFileInvoice className="dashboard-icon" />
-          <h3>View Invoices</h3>
-          <p>Review and archive project invoices.</p>
-        </div>
-        <div className="dashboard-card">
-          <FaSearchDollar className="dashboard-icon" />
-          <h3>Payment Tracking</h3>
-          <p>Monitor disbursed and pending transactions.</p>
-        </div>
-        <div className="dashboard-card">
-          <FaClipboardList className="dashboard-icon" />
-          <h3>Reports</h3>
-          <p>Generate reports on payments and approvals.</p>
-        </div>
-        <div className="dashboard-card">
-          <FaHistory className="dashboard-icon" />
-          <h3>Transaction History</h3>
-          <p>Access complete records of all transactions.</p>
+    <div>
+      <Header />
+      <div className="dashboard-container">
+        <h2 className="dashboard-title">Bank Management Dashboard</h2>
+        <div className="dashboard-modules">
+          <div className="dashboard-card" onClick={() => navigate("/make-payments")}>
+            <FaMoneyCheckAlt className="dashboard-icon" />
+            <h3>Make Payments</h3>
+            <p>Release payments for completed milestones.</p>
+          </div>
+          <div className="dashboard-card" onClick={() => navigate("/review-invoices")}>
+            <FaFileInvoice className="dashboard-icon" />
+            <h3>Review Invoices</h3>
+            <p>Audit submitted invoices before approval.</p>
+          </div>
+          <div className="dashboard-card" onClick={() => navigate("/fund-disbursement")}>
+            <FaSearchDollar className="dashboard-icon" />
+            <h3>Disbursement Requests</h3>
+            <p>View and process funding requests.</p>
+          </div>
+          <div className="dashboard-card" onClick={() => navigate("/loan-applications")}>
+            <FaClipboardList className="dashboard-icon" />
+            <h3>Loan Applications</h3>
+            <p>Manage and review project loan requests.</p>
+          </div>
+          <div className="dashboard-card" onClick={() => navigate("/transaction-history")}>
+            <FaHistory className="dashboard-icon" />
+            <h3>Transaction History</h3>
+            <p>Track all payment and transaction records.</p>
+          </div>
         </div>
       </div>
     </div>
