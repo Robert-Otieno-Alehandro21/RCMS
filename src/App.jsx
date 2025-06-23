@@ -13,30 +13,30 @@ import Constructioncompany from "./Dashboards/Constructioncompany";
 import Bankmanagement from "./Dashboards/Bankmanagement";
 
 // User Dashboard Modules
-import CreateProject from "./pages/Create Project";
-import ViewProgress from "./pages/View Progress";
-import ManageTeam from "./pages/Manage Team";
-import ProjectSchedule from "./pages/Project Schedule";
-import ToolsResources from "./pages/Tools Resources";
+import CreateProject from "./pages/CreateProject";
+import ViewProgress from "./pages/ViewProgress";
+import ManageTeam from "./pages/ManageTeam";
+import ProjectSchedule from "./pages/ProjectSchedule";
+import ToolsResources from "./pages/ToolsResources";
 
-// Project Manager Modules (Aliased to avoid duplicate import names)
-import CreateProjectPM from "./pages/Create Project";
-import SelectLand from "./pages/Select Land";
-import UploadPhotos from "./pages/Upload Photos";
-import ApproveMilestones from "./pages/Approve Milestones";
-import ManageResources from "./pages/Manage Resources";
+// Project Manager Modules 
+import CreateProjectPM from "./pages/CreateProject";
+import SelectLand from "./pages/SelectLand";
+import UploadPhotos from "./pages/UploadPhotos";
+import ApproveMilestones from "./pages/ApproveMilestones";
+import ManageResources from "./pages/ManageResources";
 
 // Construction Company Modules
-import BidProjects from "./pages/Bid Projects";
-import RequestMaterials from "./pages/Request Materials";
-import TrackDeliveries from "./pages/Track Deliveries";
-import Workforce from "./pages/Work force";
+import BidProjects from "./pages/BidProjects";
+import RequestMaterials from "./pages/RequestMaterials";
+import TrackDeliveries from "./pages/TrackDeliveries";
+import Workforce from "./pages/Workforce";
 
 // Bank Modules
-import MakePayments from "./pages/Make Payments";
-import ViewInvoices from "./pages/View Invoices";
-import FundingRequests from "./pages/Funding Requests";
-import TransactionHistory from "./pages/Transaction History";
+import MakePayments from "./pages/MakePayments";
+import ViewInvoices from "./pages/ViewInvoices";
+import FundingRequests from "./pages/FundingRequests";
+import TransactionHistory from "./pages/TransactionHistory";
 
 const App = () => {
   return (
