@@ -1,7 +1,69 @@
-.page-container {
-  padding: 2rem;
-  background-color: #ffffff;
+.project-schedule-container {
+  background-color: #013220;
+  color: white;
   min-height: 100vh;
+  padding: 2rem;
+  animation: fadeIn 1s ease;
+}
+
+.project-schedule-title {
   text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.schedule-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.schedule-card {
+  background-color: white;
+  color: #013220;
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  max-width: 300px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+  animation: popIn 0.9s ease;
+}
+
+.schedule-card:hover {
+  transform: translateY(-5px);
+}
+
+.schedule-card h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
   color: #006400;
+}
+
+.schedule-card p {
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

@@ -2,11 +2,13 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 
+// General Pages
 import Homepage from "./Pages/Homepage";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import ForgotPassword from "./Pages/ForgotPassword";
 
+// Dashboards
 import Userdashboard from "./Dashboards/Userdashboard";
 import Projectmanager from "./Dashboards/Projectmanager";
 import Constructioncompany from "./Dashboards/Constructioncompany";
@@ -19,8 +21,7 @@ import ManageTeam from "./pages/ManageTeam";
 import ProjectSchedule from "./pages/ProjectSchedule";
 import ToolsResources from "./pages/ToolsResources";
 
-// Project Manager Modules 
-import CreateProjectPM from "./pages/CreateProject";
+// Project Manager Modules
 import SelectLand from "./pages/SelectLand";
 import UploadPhotos from "./pages/UploadPhotos";
 import ApproveMilestones from "./pages/ApproveMilestones";
@@ -32,7 +33,7 @@ import RequestMaterials from "./pages/RequestMaterials";
 import TrackDeliveries from "./pages/TrackDeliveries";
 import Workforce from "./pages/Workforce";
 
-// Bank Modules
+// Bank Management Modules
 import MakePayments from "./pages/MakePayments";
 import ViewInvoices from "./pages/ViewInvoices";
 import FundingRequests from "./pages/FundingRequests";
@@ -41,6 +42,7 @@ import TransactionHistory from "./pages/TransactionHistory";
 const App = () => {
   return (
     <Routes>
+      {/* General Pages */}
       <Route path="/" element={<Homepage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
@@ -60,7 +62,6 @@ const App = () => {
       <Route path="/tools-resources" element={<ToolsResources />} />
 
       {/* Project Manager Pages */}
-      <Route path="/create-project-pm" element={<CreateProjectPM />} />
       <Route path="/select-land" element={<SelectLand />} />
       <Route path="/upload-photos" element={<UploadPhotos />} />
       <Route path="/approve-milestones" element={<ApproveMilestones />} />

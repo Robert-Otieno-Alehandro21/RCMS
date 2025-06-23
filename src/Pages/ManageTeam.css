@@ -1,7 +1,65 @@
-.page-container {
-  padding: 2rem;
-  background-color: #ffffff;
+.manage-team-container {
+  background-color: #013220;
+  color: white;
   min-height: 100vh;
+  padding: 2rem;
+}
+
+.manage-team-header {
   text-align: center;
-  color: #006400;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.team-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.team-card {
+  background-color: white;
+  color: #013220;
+  border-radius: 10px;
+  padding: 1rem;
+  width: 250px;
+  animation: fadeIn 1s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.team-card h4 {
+  margin-bottom: 0.5rem;
+}
+
+.sub-links {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.sub-links a {
+  color: white;
+  text-decoration: none;
+  background-color: #006400;
+  padding: 0.6rem;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.sub-links a:hover {
+  background-color: #228B22;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
