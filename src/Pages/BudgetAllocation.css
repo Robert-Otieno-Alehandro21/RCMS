@@ -1,12 +1,11 @@
-.upload-container {
+.budget-container {
   background-color: #013220;
+  color: white;
   min-height: 100vh;
   padding: 2rem;
   font-family: 'Segoe UI', sans-serif;
-  color: white;
 }
 
-/* Header */
 .project-header {
   display: flex;
   justify-content: space-between;
@@ -34,68 +33,83 @@
   color: #90EE90;
 }
 
-/* Title */
-.upload-title {
+.budget-title {
   text-align: center;
   font-size: 2rem;
   color: #90EE90;
   margin-bottom: 2rem;
 }
 
-/* Grid */
-.upload-grid {
+.budget-sections {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 2rem;
+  justify-content: center;
 }
 
-/* Card */
-.upload-card {
-  background-color: #ffffff;
+.budget-card {
+  background-color: #fff;
   color: #013220;
   padding: 2rem;
-  border-radius: 15px;
-  width: 300px;
-  text-align: center;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  width: 320px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease;
 }
 
-.upload-card:hover {
+.budget-card:hover {
   transform: translateY(-5px);
 }
 
-.upload-icon {
-  font-size: 2.5rem;
+.budget-card h3 {
   color: #006400;
   margin-bottom: 1rem;
 }
 
-.upload-card h3 {
-  font-size: 1.2rem;
+.budget-card ul {
+  list-style: none;
+  padding: 0;
   margin-bottom: 1rem;
 }
 
-.upload-card input[type="file"] {
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 0.5rem;
-  width: 100%;
+.budget-card ul li {
+  padding: 0.4rem 0;
+  border-bottom: 1px solid #ddd;
 }
 
-.upload-card button {
+.budget-card p {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 0.8rem;
+  color: #2e8b57;
+}
+
+.budget-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   background-color: #006400;
   color: white;
+  padding: 0.6rem 1rem;
+  margin-top: 1rem;
   border: none;
-  padding: 0.6rem 1.2rem;
   border-radius: 8px;
-  font-weight: 600;
   cursor: pointer;
+  text-decoration: none;
+  font-weight: 600;
   transition: background-color 0.3s ease;
 }
 
-.upload-card button:hover {
+.budget-btn:hover {
   background-color: #228b22;
+}
+
+.upload-field {
+  margin-top: 1rem;
+  width: 100%;
+  padding: 0.6rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  color: #333;
 }

@@ -22,7 +22,8 @@ import ProjectSchedule from "./pages/ProjectSchedule";
 import ToolsResources from "./pages/ToolsResources";
 
 // Project Manager Modules
-import SelectLand from "./pages/SelectLand";
+import FetchProject from "./pages/FetchProject";
+import BudgetAllocation from "./pages/BudgetAllocation";
 import UploadPhotos from "./pages/UploadPhotos";
 import ApproveMilestones from "./pages/ApproveMilestones";
 import ManageResources from "./pages/ManageResources";
@@ -62,7 +63,8 @@ const App = () => {
       <Route path="/tools-resources" element={<ToolsResources />} />
 
       {/* Project Manager Pages */}
-      <Route path="/select-land" element={<SelectLand />} />
+      <Route path="/fetch-project" element={<FetchProject />} />
+      <Route path="/budget-allocation" element={<BudgetAllocation />} />
       <Route path="/upload-photos" element={<UploadPhotos />} />
       <Route path="/approve-milestones" element={<ApproveMilestones />} />
       <Route path="/manage-resources" element={<ManageResources />} />
