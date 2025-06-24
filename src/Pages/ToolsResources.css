@@ -2,8 +2,38 @@
   background-color: #013220; /* Dark green background */
   min-height: 100vh;
   padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
 }
 
+/* === Header (New) === */
+.tools-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #00703c;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+}
+
+.tools-header .logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: white;
+}
+
+.tools-header .back-button {
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.tools-header .back-button:hover {
+  color: #90EE90;
+}
+
+/* === Title === */
 .tools-title {
   text-align: center;
   color: #ffffff;
@@ -12,6 +42,7 @@
   font-weight: bold;
 }
 
+/* === Grid Layout === */
 .tools-grid {
   display: flex;
   flex-wrap: wrap;
@@ -19,8 +50,9 @@
   gap: 2rem;
 }
 
+/* === Tool Card === */
 .tool-card {
-  background-color: #ffffff; /* White card for contrast */
+  background-color: #ffffff;
   border-radius: 15px;
   padding: 2rem;
   width: 280px;
@@ -34,6 +66,7 @@
   box-shadow: 0 12px 24px rgba(0, 255, 0, 0.2);
 }
 
+/* === Icon & Button === */
 .tool-icon {
   font-size: 2.5rem;
   color: #006400;
@@ -56,6 +89,7 @@
   background-color: #228b22;
 }
 
+/* === Input Fields === */
 .upload-input,
 .report-select {
   margin-top: 0.8rem;

@@ -1,70 +1,35 @@
 import React from "react";
 import "./ProjectSchedule.css";
-import { Pie } from "react-chartjs-2";
-import {
-  Chart,
-  ArcElement,
-  Tooltip,
-  Legend,
-} from "chart.js";
 
-Chart.register(ArcElement, Tooltip, Legend);
+const schedule = [
+  { stage: "Site Clearing", date: "2025-07-01", status: "Completed", percentage: 100 },
+  { stage: "Foundation Work", date: "2025-07-10", status: "In Progress", percentage: 70 },
+  { stage: "Structural Framing", date: "2025-07-20", status: "Pending", percentage: 0 },
+  { stage: "Roofing", date: "2025-07-30", status: "Pending", percentage: 0 },
+  { stage: "Finishing", date: "2025-08-05", status: "Pending", percentage: 0 },
+];
 
 const ProjectSchedule = () => {
-  const pieData = {
-    labels: ["Foundation", "Framing", "Roofing", "Finishing", "Inspection"],
-    datasets: [
-      {
-        data: [20, 25, 15, 30, 10],
-        backgroundColor: [
-          "#006400",
-          "#228B22",
-          "#32CD32",
-          "#7CFC00",
-          "#ADFF2F"
-        ],
-        hoverOffset: 8,
-      },
-    ],
-  };
-
-  const pieOptions = {
-    plugins: {
-      legend: {
-        position: "right",
-        labels: {
-          color: "#333",
-          font: {
-            size: 14,
-          },
-        },
-      },
-    },
-    animation: {
-      animateScale: true,
-      animateRotate: true,
-    },
-  };
-
   return (
     <div className="schedule-container">
-      <h2>Project Schedule Overview</h2>
+      <header className="schedule-header">
+        <div className="logo">RCMS</div>
+        <div className="back-button" onClick={() => window.history.back()}>&lt;</div>
+      </header>
 
-      <div className="pie-chart-box">
-        <Pie data={pieData} options={pieOptions} />
-      </div>
+      <h2 className="schedule-title">Project Schedule</h2>
 
-      <div className="phase-details">
-        {[
-          { phase: "Foundation", status: "Completed" },
-          { phase: "Framing", status: "In Progress" },
-          { phase: "Roofing", status: "Upcoming" },
-          { phase: "Finishing", status: "Upcoming" },
-          { phase: "Inspection", status: "Pending Approval" },
-        ].map((item, i) => (
-          <div className="phase-card" key={i}>
-            <h4>{item.phase}</h4>
-            <p>Status: {item.status}</p>
+      <div className="schedule-grid">
+        {schedule.map((item, index) => (
+          <div key={index} className="schedule-card">
+            <h3>{item.stage}</h3>
+            <p><strong>Date:</strong> {item.date}</p>
+            <p><strong>Status:</strong> {item.status}</p>
+            <div className="progress-bar">
+              <div className="progress-fill" style={{ width: `${item.percentage}%` }}>
+                {item.percentage}%
+              </div>
+            </div>
           </div>
         ))}
       </div>
