@@ -1,7 +1,104 @@
-.page-container {
-  padding: 2rem;
+.make-payments-container {
+  background-color: #013220;
+  color: white;
   min-height: 100vh;
-  background-color: #ffffff;
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.payments-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #005f3c;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+}
+
+.payments-header .logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: white;
+}
+
+.payments-header .back-button {
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+.payments-header .back-button:hover {
+  color: #90EE90;
+}
+
+.payment-title {
   text-align: center;
-  color: #006400;
+  color: #90EE90;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.payment-info {
+  background-color: #ffffff;
+  color: #333;
+  border-radius: 12px;
+  padding: 1.5rem;
+  max-width: 700px;
+  margin: 0 auto 2rem auto;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+}
+
+.payment-info p {
+  margin: 0.8rem 0;
+  font-size: 1rem;
+}
+
+.status-label {
+  font-weight: bold;
+}
+
+.approved {
+  color: #00FF7F;
+}
+
+.pending {
+  color: #FFD700;
+}
+
+.payment-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.notify-btn,
+.submit-btn {
+  background-color: #006400;
+  color: white;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  min-width: 220px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.notify-btn:hover,
+.submit-btn:hover {
+  background-color: #228B22;
+}
+
+.notification {
+  text-align: center;
+  font-style: italic;
+  color: #90EE90;
+  margin-top: 1rem;
 }
