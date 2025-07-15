@@ -1,15 +1,24 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import './index.css';
-import 'leaflet/dist/leaflet.css'; 
-
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
+import './index.css';
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <BrowserRouter>
+// ✅ React Router
+import { BrowserRouter } from 'react-router-dom';
+
+// ✅ Toasts
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <React.StrictMode>
+    <BrowserRouter> {/* ✅ Wrap App in Router */}
       <App />
+      <ToastContainer 
+        position="top-center"
+        autoClose={3000}
+        theme="colored"
+      />
     </BrowserRouter>
-  </StrictMode>
+  </React.StrictMode>
 );
