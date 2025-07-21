@@ -1,20 +1,34 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
 const projectSchema = new mongoose.Schema({
-  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  name: String,
-  location: {
-    latitude: Number,
-    longitude: Number
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  title: {
+    type: String,
+    required: true,
+  },
+  description: String,
+  location: String,
+  coordinates: {
+    latitude: String,
+    longitude: String,
+  },
+  budget: {
+    type: Number,
+    required: true,
   },
   status: {
     type: String,
-    default: 'pending'
+    enum: ["pending", "in_progress", "completed"],
+    default: "pending",
   },
   createdAt: {
     type: Date,
-    default: Date.now
-  }
-})
+    default: Date.now,
+  },
+});
 
-module.exports = mongoose.model('Project', projectSchema)
+module.exports = mongoose.model("Project", projectSchema);

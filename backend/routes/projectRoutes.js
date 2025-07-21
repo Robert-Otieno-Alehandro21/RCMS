@@ -1,9 +1,8 @@
-const express = require('express')
-const router = express.Router()
-const { createProject, getUserProjects } = require('../controllers/projectController')
-const protect = require('../middleware/auth')
+const express = require("express");
+const router = express.Router();
+const { createProject, getProjectsByUser } = require("../controllers/projectController");
 
-router.post('/create', protect(['user']), createProject)
-router.get('/my-projects', protect(['user']), getUserProjects)
+router.post("/create", createProject);
+router.get("/user/:userId", getProjectsByUser);
 
-module.exports = router
+module.exports = router;

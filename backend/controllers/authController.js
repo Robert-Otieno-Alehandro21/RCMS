@@ -1,63 +1,69 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const crypto = require('crypto');
 const sendEmail = require('../utils/sendEmail');
 
 exports.register = async (req, res) => {
+  const { fullName, email, password, phone, role } = req.body;
+
   try {
-    const { fullName, email, password, phone, role } = req.body;
     const existingUser = await User.findOne({ email });
     if (existingUser) return res.status(400).json({ message: 'Email already exists' });
 
-    const hashed = await bcrypt.hash(password, 10);
-    const user = new User({ fullName, email, password: hashed, phone, role });
-    await user.save();
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = new User({ fullName, email, phone, role, password: hashedPassword });
+    await newUser.save();
 
     res.status(201).json({ message: 'User registered successfully' });
   } catch (err) {
-    console.error(err);
     res.status(500).json({ message: 'Server error' });
   }
 };
 
 exports.login = async (req, res) => {
+  const { email, password } = req.body;
+
   try {
-    const { email, password } = req.body;
     const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ message: 'Invalid credentials' });
+    if (!user) return res.status(400).json({ message: 'Invalid email or password' });
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ message: 'Invalid credentials' });
+    if (!isMatch) return res.status(400).json({ message: 'Invalid email or password' });
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
-    res.json({ token, user: { id: user._id, role: user.role } });
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+    res.status(200).json({
+      message: 'Login successful',
+      token,
+      user: {
+        id: user._id,
+        fullName: user.fullName,
+        role: user.role,
+        email: user.email
+      }
+    });
   } catch (err) {
-    console.error(err);
     res.status(500).json({ message: 'Server error' });
   }
 };
 
 exports.forgotPassword = async (req, res) => {
   const { email } = req.body;
+
   try {
     const user = await User.findOne({ email });
-    if (!user) return res.status(404).json({ message: 'Email not found' });
+    if (!user) return res.status(400).json({ message: 'User not found' });
 
-    const token = crypto.randomBytes(32).toString('hex');
-    user.resetPasswordToken = token;
-    user.resetPasswordExpires = Date.now() + 3600000;
-    await user.save();
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '15m' });
 
-    const resetLink = `http://localhost:5173/reset-password/${token}`;
-    const html = `
+    const resetUrl = `http://localhost:5173/reset-password/${token}`;
+    const message = `
       <h3>Password Reset</h3>
-      <p>Click below to reset your password:</p>
-      <a href="${resetLink}">${resetLink}</a>
+      <p>Click the link below to reset your password:</p>
+      <a href="${resetUrl}">${resetUrl}</a>
     `;
 
-    await sendEmail(user.email, 'RCMS Password Reset', html);
-    res.json({ message: 'Reset link sent to your email' });
+    await sendEmail(user.email, 'RCMS Password Reset', message);
+    res.status(200).json({ message: 'Reset link sent to email' });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Server error' });
@@ -69,22 +75,16 @@ exports.resetPassword = async (req, res) => {
   const { password } = req.body;
 
   try {
-    const user = await User.findOne({
-      resetPasswordToken: token,
-      resetPasswordExpires: { $gt: Date.now() }
-    });
-
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.id);
     if (!user) return res.status(400).json({ message: 'Invalid or expired token' });
 
     const hashed = await bcrypt.hash(password, 10);
     user.password = hashed;
-    user.resetPasswordToken = undefined;
-    user.resetPasswordExpires = undefined;
-
     await user.save();
-    res.json({ message: 'Password reset successful' });
+
+    res.status(200).json({ message: 'Password reset successful' });
   } catch (err) {
-    console.error(err);
     res.status(500).json({ message: 'Server error' });
   }
 };

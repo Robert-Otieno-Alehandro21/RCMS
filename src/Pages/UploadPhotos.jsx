@@ -2,21 +2,39 @@ import React, { useState } from "react";
 import "./UploadPhotos.css";
 import { useNavigate } from "react-router-dom";
 import { FaUpload, FaImages, FaBox, FaFileAlt } from "react-icons/fa";
+import axios from "axios";
 
 const UploadPhotos = () => {
   const navigate = useNavigate();
   const [files, setFiles] = useState({});
+  const projectId = "123456"; // Temporary project ID
 
   const handleFileChange = (e, category) => {
     setFiles({ ...files, [category]: e.target.files[0] });
     alert(`${category} file selected.`);
   };
 
-  const handleUpload = (category) => {
-    if (files[category]) {
-      alert(`📤 ${category} uploaded successfully!`);
-    } else {
+  const handleUpload = async (category) => {
+    if (!files[category]) {
       alert(`❌ No file selected for ${category}`);
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("photo", files[category]);
+    formData.append("category", category);
+    formData.append("projectId", projectId);
+
+    try {
+      await axios.post("http://localhost:5000/api/photos/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      alert(`📤 ${category} uploaded successfully!`);
+    } catch (error) {
+      console.error("Upload failed:", error);
+      alert(`❌ Failed to upload ${category}`);
     }
   };
 
