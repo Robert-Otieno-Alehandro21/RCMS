@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./ViewProgress.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { API_BASE } from '../utils/api';
 import { Bar, Pie } from "react-chartjs-2";
 import {
   Chart,
@@ -15,22 +17,52 @@ Chart.register(ArcElement, BarElement, CategoryScale, LinearScale, Tooltip, Lege
 
 const ViewProgress = () => {
   const navigate = useNavigate();
+  const [projectStages, setProjectStages] = useState([]);
+  const [progressPercentage, setProgressPercentage] = useState(0);
 
-  const progressPercentage = 85;
+  useEffect(() => {
+    const fetchProgress = async () => {
+      try {
+  const response = await axios.get(`${API_BASE}/api/progress/PROJECT_ID`);
+        const data = response.data;
+        setProjectStages(data.stages);
+        const completed = data.stages.filter(s => s.status === "Completed").length;
+        setProgressPercentage(Math.round((completed / data.stages.length) * 100));
+      } catch (error) {
+        console.error("Error fetching progress data:", error);
+      }
+    };
+    fetchProgress();
+  }, []);
 
-  const projectStages = [
-    { name: "Foundation", status: "Completed", date: "2025-05-01" },
-    { name: "Walls", status: "Completed", date: "2025-05-15" },
-    { name: "Roofing", status: "In Progress", date: "Expected: 2025-06-25" },
-    { name: "Finishing", status: "Pending", date: "Expected: 2025-07-10" },
-  ];
+  const handleMarkComplete = async (stageId) => {
+    try {
+  await axios.put(`${API_BASE}/api/progress/stage/${stageId}`, {
+        status: "Completed",
+      });
+      setProjectStages(prev =>
+        prev.map(stage => stage._id === stageId ? { ...stage, status: "Completed" } : stage)
+      );
+    } catch (err) {
+      console.error("Error updating stage:", err);
+    }
+  };
+
+  const handleDeleteStage = async (stageId) => {
+    try {
+  await axios.delete(`${API_BASE}/api/progress/stage/${stageId}`);
+      setProjectStages(prev => prev.filter(stage => stage._id !== stageId));
+    } catch (err) {
+      console.error("Error deleting stage:", err);
+    }
+  };
 
   const pieData = {
     labels: projectStages.map((stage) => stage.name),
     datasets: [
       {
         label: "Project Stages",
-        data: [25, 35, 20, 20],
+        data: projectStages.map(() => 25), // placeholder values
         backgroundColor: ["#006400", "#228B22", "#90EE90", "#2E8B57"],
       },
     ],
@@ -57,18 +89,23 @@ const ViewProgress = () => {
       <h2 className="title">Project Progress Overview</h2>
 
       <div className="progress-details">
-        <p>🛠️ <strong>Current Stage:</strong> Roofing</p>
-        <p>📊 <strong>Estimated Completion:</strong> {progressPercentage}%</p>
-        <p>📅 <strong>Next Stage:</strong> Finishing</p>
-        <p>🔍 <strong>Expected Completion Time:</strong> 2 weeks remaining</p>
+        <p>🛠️ <strong>Progress:</strong> {progressPercentage}% Completed</p>
       </div>
 
       <div className="stage-boxes">
         {projectStages.map((stage, index) => (
           <div key={index} className={`stage-card ${stage.status.toLowerCase()}`}>
-            <h3>{stage.name}</h3>
+            <div className="stage-header">
+              <h3>{stage.name}</h3>
+              <span className="delete-button" onClick={() => handleDeleteStage(stage._id)}>✖</span>
+            </div>
             <p>Status: <strong>{stage.status}</strong></p>
             <p>{stage.date}</p>
+            {stage.status !== "Completed" && (
+              <div className="stage-actions">
+                <button onClick={() => handleMarkComplete(stage._id)}>✅ Mark as Complete</button>
+              </div>
+            )}
           </div>
         ))}
       </div>

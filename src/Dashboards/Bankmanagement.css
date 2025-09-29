@@ -1,54 +1,291 @@
-.bank-dashboard {
-  background-color: #013220;
+.dashboard-container {
+  background: linear-gradient(135deg, hsl(var(--background)), hsl(var(--muted)));
   min-height: 100vh;
-  padding: 2rem;
-  font-family: 'Segoe UI', sans-serif;
-  color: white;
 }
 
-.dashboard-title {
-  color: white;
-  text-align: center;
-  margin-bottom: 2rem;
-  font-size: 2rem;
-}
-
-.dashboard-modules {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 2rem;
-}
-
+/* Enhanced Card Animations */
 .dashboard-card {
-  background-color: #006400;
-  color: white;
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  border-radius: 12px;
   padding: 1.5rem;
-  border-radius: 15px;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  transition: transform 0.3s ease;
+  box-shadow: var(--shadow-card);
   cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.dashboard-card:hover::before {
+  left: 100%;
 }
 
 .dashboard-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 10px 20px rgba(0, 255, 0, 0.2);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--shadow-construction);
+  border-color: hsl(var(--construction-green) / 0.3);
 }
 
+.dashboard-card:active {
+  transform: translateY(-4px) scale(0.98);
+}
+
+/* Icon Styling */
 .dashboard-icon {
-  font-size: 2.2rem;
+  font-size: 2.5rem;
   margin-bottom: 1rem;
-  color: white;
+  color: hsl(var(--construction-green));
+  transition: all 0.3s ease;
 }
 
+.dashboard-card:hover .dashboard-icon {
+  color: hsl(var(--construction-green-light));
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Typography */
 .dashboard-card h3 {
-  margin: 0.5rem 0;
-  font-size: 1.3rem;
-  font-weight: bold;
-  color: #ffffff;
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: hsl(var(--foreground));
+  transition: color 0.3s ease;
 }
 
 .dashboard-card p {
   font-size: 0.95rem;
-  color: #f0f0f0;
+  color: hsl(var(--muted-foreground));
+  line-height: 1.5;
+}
+
+/* Sidebar Enhancements */
+.sidebar-module-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar-module-button::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, hsl(var(--construction-green) / 0.1), transparent);
+  transition: left 0.3s ease;
+}
+
+.sidebar-module-button:hover::after {
+  left: 100%;
+}
+
+/* Stats Card Animations */
+.stats-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.stats-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, hsl(var(--construction-green) / 0.05) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.stats-card:hover::before {
+  opacity: 1;
+}
+
+/* Welcome Card Gradient Animation */
+.welcome-card {
+  background: var(--gradient-construction);
+  position: relative;
+  overflow: hidden;
+}
+
+.welcome-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Activity Timeline Dots */
+.activity-dot {
+  position: relative;
+}
+
+.activity-dot::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+.activity-dot.success::before {
+  background: hsl(var(--construction-success) / 0.3);
+}
+
+.activity-dot.warning::before {
+  background: hsl(var(--construction-warning) / 0.3);
+}
+
+.activity-dot.info::before {
+  background: hsl(var(--primary) / 0.3);
+}
+
+@keyframes pulse {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+}
+
+/* Button Enhancements */
+.action-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.action-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.action-button:hover::before {
+  left: 100%;
+}
+
+/* Hover Scale Animation */
+.hover-scale {
+  transition: transform 0.2s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+/* Fade In Animation */
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Loading States */
+.loading-shimmer {
+  background: linear-gradient(90deg, hsl(var(--muted)) 25%, hsl(var(--muted) / 0.5) 50%, hsl(var(--muted)) 75%);
+  background-size: 200% 100%;
+  animation: shimmer-load 1.5s infinite;
+}
+
+@keyframes shimmer-load {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+  .dashboard-modules {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .dashboard-card {
+    padding: 1.25rem;
+  }
+  
+  .dashboard-icon {
+    font-size: 2rem;
+  }
+}
+
+/* Dark Mode Adjustments */
+@media (prefers-color-scheme: dark) {
+  .dashboard-card {
+    background: hsl(var(--card));
+    border-color: hsl(var(--border));
+  }
+  
+  .dashboard-card:hover {
+    border-color: hsl(var(--construction-green) / 0.5);
+  }
+}
+
+/* Focus States for Accessibility */
+.dashboard-card:focus,
+.sidebar-module-button:focus,
+.action-button:focus {
+  outline: 2px solid hsl(var(--construction-green));
+  outline-offset: 2px;
+}
+
+/* Smooth Scrolling */
+.dashboard-container {
+  scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+.dashboard-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dashboard-container::-webkit-scrollbar-track {
+  background: hsl(var(--muted));
+}
+
+.dashboard-container::-webkit-scrollbar-thumb {
+  background: hsl(var(--construction-green));
+  border-radius: 3px;
+}
+
+.dashboard-container::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--construction-green-light));
 }

@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { useAppContext } from '../AppContext';
 import "./UploadPhotos.css";
 import { useNavigate } from "react-router-dom";
 import { FaUpload, FaImages, FaBox, FaFileAlt } from "react-icons/fa";
 import axios from "axios";
+import { API_BASE } from '../utils/api';
 
 const UploadPhotos = () => {
+  const { user: _user, selectedProject: _selectedProject } = useAppContext();
   const navigate = useNavigate();
   const [files, setFiles] = useState({});
   const projectId = "123456"; // Temporary project ID
@@ -26,7 +29,7 @@ const UploadPhotos = () => {
     formData.append("projectId", projectId);
 
     try {
-      await axios.post("http://localhost:5000/api/photos/upload", formData, {
+  await axios.post(`${API_BASE}/api/photos/upload`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

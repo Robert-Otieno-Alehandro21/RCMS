@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./CreateProject.css";
 import { useNavigate } from "react-router-dom";
+import { apiFetch } from "../utils/api";
 import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
 import { Bar, Pie } from "react-chartjs-2";
 import {
@@ -10,9 +11,9 @@ import {
   CategoryScale,
   LinearScale,
 } from "chart.js";
+
 Chart.register(ArcElement, BarElement, CategoryScale, LinearScale);
 
-// Component to capture map click events
 const LocationSelector = ({ setLocation }) => {
   useMapEvents({
     click(e) {
@@ -27,9 +28,47 @@ const LocationSelector = ({ setLocation }) => {
 
 const CreateProject = () => {
   const [location, setLocation] = useState({ latitude: "", longitude: "" });
-  const navigate = useNavigate(); // For navigation
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const navigate = useNavigate();
 
-  // Bar chart data
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!title || !description || !location.latitude || !location.longitude) {
+      alert("Please fill in all fields and select a location.");
+      return;
+    }
+
+    const newProject = {
+      title,
+      description,
+      latitude: location.latitude,
+      longitude: location.longitude,
+    };
+
+    try {
+      const result = await apiFetch('/api/projects/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newProject),
+      });
+      // assume success when result contains an _id or similar
+      if (result && (result._id || result.id)) {
+        alert('✅ Project created successfully!');
+        setTitle('');
+        setDescription('');
+        setLocation({ latitude: '', longitude: '' });
+        navigate('/user-dashboard');
+      } else {
+        alert('❌ Failed to create project.');
+      }
+    } catch (error) {
+      console.error('Error submitting project:', error);
+      alert('Server error occurred.');
+    }
+  };
+
   const barData = {
     labels: ["Budget Allocated", "Used", "Remaining"],
     datasets: [
@@ -41,7 +80,6 @@ const CreateProject = () => {
     ],
   };
 
-  // Pie chart data
   const pieData = {
     labels: ["Foundation", "Framing", "Roofing", "Finishing"],
     datasets: [
@@ -55,7 +93,6 @@ const CreateProject = () => {
 
   return (
     <div className="create-project-container">
-      {/* Header */}
       <header className="project-header">
         <div className="logo">RCMS</div>
         <div className="back-button" onClick={() => navigate(-1)}>
@@ -63,13 +100,22 @@ const CreateProject = () => {
         </div>
       </header>
 
-      {/* Page Title */}
       <h2 className="title">Create New Project</h2>
 
-      {/* Project Form */}
-      <form className="project-form">
-        <input type="text" placeholder="Project Title" required />
-        <textarea placeholder="Project Description" required></textarea>
+      <form className="project-form" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Project Title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
+        <textarea
+          placeholder="Project Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
+        ></textarea>
 
         <div className="input-group">
           <label>Select Location (Click on Map)</label>
@@ -102,7 +148,6 @@ const CreateProject = () => {
         <button type="submit">Submit Project</button>
       </form>
 
-      {/* Charts Section */}
       <div className="charts">
         <div className="chart-box">
           <h4>Budget Allocation</h4>

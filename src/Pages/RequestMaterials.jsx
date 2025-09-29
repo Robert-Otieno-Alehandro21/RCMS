@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { useAppContext } from '../AppContext';
+import { API_BASE } from '../utils/api';
+import axios from "axios";
 import "./RequestMaterials.css";
 
 const RequestMaterials = () => {
@@ -21,10 +24,31 @@ const RequestMaterials = () => {
     ]);
   };
 
-  const submitRequest = () => {
-    setPreviousRequests([...previousRequests, ...materials]);
-    setMaterials([{ name: "", quantity: "", cost: "", urgency: "Normal", notes: "" }]);
-    alert("Material request sent to Project Manager successfully!");
+  const { user, selectedProject } = useAppContext();
+  const companyId = user?.companyId;
+  const projectId = selectedProject?.projectId || selectedProject?._id;
+
+  const submitRequest = async () => {
+    // Debug log context values before sending request
+    console.log("Submitting material request with:", { companyId, projectId, materials });
+    if (!companyId || !projectId) {
+      alert("Error: Company ID or Project ID is missing. Please select a project and ensure you are logged in.");
+      return;
+    }
+    try {
+      const payload = {
+        companyId,
+        projectId,
+        materials
+      };
+  await axios.post(`${API_BASE}/api/materials/request`, payload);
+      alert("Material request sent to Project Manager successfully!");
+      setPreviousRequests([...previousRequests, ...materials]);
+      setMaterials([{ name: "", quantity: "", cost: "", urgency: "Normal", notes: "" }]);
+    } catch (error) {
+      console.error("Error submitting material request:", error);
+      alert("Failed to submit material request.");
+    }
   };
 
   return (
@@ -91,7 +115,6 @@ const RequestMaterials = () => {
         </div>
       </div>
 
-      {/* Previous Requests */}
       <h2 className="materials-title" style={{ marginTop: "3rem" }}>Previous Requests</h2>
       <div className="previous-requests">
         {previousRequests.length === 0 ? (

@@ -20,8 +20,8 @@ router.post("/add", (req, res) => {
 router.get("/list", (req, res) => {
   // In real case, you'd fetch this from DB
   const team = [
-    { name: "John Doe", role: "Engineer", email: "john@example.com" },
-    { name: "Jane Smith", role: "Supervisor", email: "jane@example.com" },
+    { name: "Cristiano Ronaldo", role: "Engineer", email: "cristiano@example.com" },
+    { name: "Lionel Messi", role: "Supervisor", email: "messi@example.com" },
   ];
   res.status(200).json(team);
 });

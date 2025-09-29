@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useAppContext } from '../AppContext';
 import './Register.css';
 import axios from 'axios';
 import { FaUser, FaEnvelope, FaLock, FaPhone, FaUsers } from 'react-icons/fa';
@@ -18,6 +19,7 @@ const Register = () => {
 
   const [showSuccess, setShowSuccess] = useState(false);
   const navigate = useNavigate();
+  const { setUser } = useAppContext();
 
   const handleChange = (e) => {
     setFormData(prev => ({
@@ -35,7 +37,8 @@ const Register = () => {
     }
 
     try {
-      await axios.post('/api/auth/register', formData);
+      const res = await axios.post('/api/auth/register', formData);
+      setUser(res.data.user); // Store user info in context if returned
       setShowSuccess(true);
     } catch (err) {
       console.error(err);

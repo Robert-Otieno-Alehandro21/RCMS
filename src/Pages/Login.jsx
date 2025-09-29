@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useAppContext } from '../AppContext';
 import './Login.css';
 import axios from 'axios';
 import { FaEnvelope, FaLock } from 'react-icons/fa';
@@ -10,6 +11,7 @@ const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [showSuccess, setShowSuccess] = useState(false);
   const navigate = useNavigate();
+  const { setUser } = useAppContext();
 
   const handleChange = (e) => {
     setFormData(prev => ({
@@ -28,14 +30,15 @@ const Login = () => {
 
     try {
       const res = await axios.post('/api/auth/login', formData);
-      const { role } = res.data.user;
+      const { user } = res.data;
+      setUser(user); // Store user info in context
       setShowSuccess(true);
 
       setTimeout(() => {
-        if (role === 'user') navigate('/user-dashboard');
-        else if (role === 'project_manager') navigate('/projectmanager');
-        else if (role === 'construction_company') navigate('/constructioncompany');
-        else if (role === 'bank') navigate('/bankmanagement');
+        if (user.role === 'user') navigate('/user-dashboard');
+        else if (user.role === 'project_manager') navigate('/projectmanager');
+        else if (user.role === 'construction_company') navigate('/constructioncompany');
+        else if (user.role === 'bank') navigate('/bankmanagement');
         else navigate('/');
       }, 2500);
     } catch (err) {
@@ -78,7 +81,7 @@ const Login = () => {
           {/* ✅ Forgot Password Link */}
           <p style={{ textAlign: 'right', marginTop: '0.5rem' }}>
             <a href="/forgot-password" style={{ color: '#006400', fontSize: '0.8rem', textDecoration: 'underline' }}>
-              Forgot Password?
+              Forgot Password? update the login.jsx 
             </a>
           </p>
         </form>

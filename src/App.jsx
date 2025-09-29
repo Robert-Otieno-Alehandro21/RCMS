@@ -15,30 +15,30 @@ import Constructioncompany from "./Dashboards/Constructioncompany";
 import Bankmanagement from "./Dashboards/Bankmanagement";
 
 // User Dashboard Modules
-import CreateProject from "./pages/CreateProject";
-import ViewProgress from "./pages/ViewProgress";
-import ManageTeam from "./pages/ManageTeam";
-import ProjectSchedule from "./pages/ProjectSchedule";
-import ToolsResources from "./pages/ToolsResources";
+import CreateProject from "./Pages/CreateProject";
+import ViewProgress from "./Pages/ViewProgress";
+import ManageTeam from "./Pages/ManageTeam";
+import ProjectSchedule from "./Pages/ProjectSchedule";
+import ToolsResources from "./Pages/ToolsResources";
 
 // Project Manager Modules
-import FetchProject from "./pages/FetchProject";
-import BudgetAllocation from "./pages/BudgetAllocation";
-import UploadPhotos from "./pages/UploadPhotos";
-import ApproveMilestones from "./pages/ApproveMilestones";
-import ManageResources from "./pages/ManageResources";
+import FetchProject from "./Pages/FetchProject";
+import BudgetAllocation from "./Pages/BudgetAllocation";
+import UploadPhotos from "./Pages/UploadPhotos";
+import ApproveMilestones from "./Pages/ApproveMilestones";
+import ManageResources from "./Pages/ManageResources";
 
 // Construction Company Modules
-import BidProjects from "./pages/BidProjects";
-import RequestMaterials from "./pages/RequestMaterials";
-import TrackDeliveries from "./pages/TrackDeliveries";
-import Workforce from "./pages/Workforce";
+import BidProjects from "./Pages/BidProjects";
+import RequestMaterials from "./Pages/RequestMaterials";
+import TrackDeliveries from "./Pages/TrackDeliveries";
+import Workforce from "./Pages/Workforce";
 
 // Bank Management Modules
-import MakePayments from "./pages/MakePayments";
-import ViewInvoices from "./pages/ViewInvoices";
-import FundingRequests from "./pages/FundingRequests";
-import TransactionHistory from "./pages/TransactionHistory";
+import MakePayments from "./Pages/MakePayments";
+import ViewInvoices from "./Pages/ViewInvoices";
+import FundingRequests from "./Pages/FundingRequests";
+import TransactionHistory from "./Pages/TransactionHistory";
 
 const App = () => {
   return (
@@ -54,7 +54,7 @@ const App = () => {
       <Route path="/user-dashboard" element={<Userdashboard />} />
       <Route path="/project-manager" element={<Projectmanager />} />
       <Route path="/construction-company" element={<Constructioncompany />} />
-      <Route path="/bank-management" element={<Bankmanagement />} />
+  <Route path="/bank-management" element={<Bankmanagement />} />
 
       {/* User Dashboard Pages */}
       <Route path="/create-project" element={<CreateProject />} />
